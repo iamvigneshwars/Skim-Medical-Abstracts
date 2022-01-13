@@ -79,7 +79,7 @@ def transformer():
                     optimizer = tf.keras.optimizers.Adam(learning_rate = 0.001),
                     metrics = ['accuracy'])
 
-    model.load_weights("Model")
+    model.load_weights("Model/Model")
     return model
 
 
