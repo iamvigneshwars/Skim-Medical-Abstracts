@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import joblib
 
-print("----------INITIALIZING MODEL----------\n")
+print("\n----------INITIALIZING MODEL----------\n")
 model= transformer()
 one_hot = joblib.load('Model/one_hot.joblib')
 def classify(data, model):
@@ -39,6 +39,6 @@ def classify(data, model):
         print(line, "\n")
 
 abstract = input("Enter Unstructured Medical Abstract: \n")
-print("----------CLASSIFYING----------\n")
+print("\n----------CLASSIFYING----------\n")
 
 classify(abstract, model)
