@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block head %} 
+ <title>Skim Unstructured Medical Abstracts</title>   
+{% endblock %} 
+
+
+{% block body %} 
+<h1>Skim Unstructured RTC Medical Abstracts</h1>
+<form action ='/' method = 'POST'>
+    Paste Abstract: <input type ='text' name ='abstract' id='abstract'>
+    <input type='submit' value='Skim'>
+</form>
+
+{% endblock %}

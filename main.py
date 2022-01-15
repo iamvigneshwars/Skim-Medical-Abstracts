@@ -4,7 +4,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
-    return "This is a main page"
+    
+    return render_template('main.html')
 
 
 if __name__ == "__main__":
