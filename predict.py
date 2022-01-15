@@ -15,8 +15,6 @@ def classify(data):
     
     results = []
     for i , line in enumerate(data[0]):
-        # print(abs_pred_classes[i],": ")
-        # print(line, "\n")
         predicted = {
                 'label':abs_pred_classes[i],
                 'sentence':line
@@ -24,10 +22,3 @@ def classify(data):
 
         results.append(predicted)
     return results
-
-
-
-# abstract = input("Enter Unstructured Medical Abstract: \n")
-
-# results = classify(abstract, model)
-
