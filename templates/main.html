@@ -12,4 +12,17 @@
     <input type='submit' value='Skim'>
 </form>
 
+{% if sentences %}
+{% for sentence in sentences %} 
+    <p>{{sentence}}</p>
+    
+{%endfor %}
+{% endif%}
+
+{% if results %}
+{% for result in results %}
+    <h3>{{result.label}} :</h3> 
+    <p>{{result.sentence}}</p>
+{%endfor%}
+{%endif%}
 {% endblock %}

@@ -5,23 +5,29 @@ import tensorflow as tf
 from tensorflow.keras import layers
 from preprocess import create_data
 
-
-print("\n----------INITIALIZING MODEL----------\n")
-model= transformer()
-def classify(data, model):
+def classify(data):
     classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
-
+    model= transformer()
+    data = create_data(data)
     abs_pred_probs = model.predict(x = data)
     abs_preds = tf.argmax(abs_pred_probs, axis=1)
     abs_pred_classes = [classes[i] for i in abs_preds]
     
+    results = []
     for i , line in enumerate(data[0]):
-        print(abs_pred_classes[i],": ")
-        print(line, "\n")
+        # print(abs_pred_classes[i],": ")
+        # print(line, "\n")
+        predicted = {
+                'label':abs_pred_classes[i],
+                'sentence':line
+                }
 
-abstract = input("Enter Unstructured Medical Abstract: \n")
-abstract = create_data(abstract)
+        results.append(predicted)
+    return results
 
-print("\n----------CLASSIFYING----------\n")
 
-classify(abstract, model)
+
+# abstract = input("Enter Unstructured Medical Abstract: \n")
+
+# results = classify(abstract, model)
+
