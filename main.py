@@ -10,7 +10,6 @@ global model
 
 app = Flask(__name__)
 
-results = []
 model = transformer()
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
@@ -18,6 +17,8 @@ def main_page():
     if request.method == 'POST':
         if request.form['abstract']:
             abstract = request.form['abstract']
+            global results
+            results = []
             classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
             data = create_data(abstract)
             abs_pred_probs = model.predict(x = data)
