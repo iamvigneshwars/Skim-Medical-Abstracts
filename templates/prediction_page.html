@@ -6,8 +6,8 @@
 
 
 {% block body %}
+<!-- <h1>Skim Unstructured RTC Medical Abstracts</h1> -->
 <br>
-
 <form action='/' method='POST'>
     <!-- <label for ='text'>Enter Unstructured Abstract:</label> -->
     <!-- <input class='form-control' type ='text' name ='text' id='text' placeholder="Enter Unstructured RTC medical abstract with more than three lines." aria-label='Enter Abstract' > -->
@@ -19,19 +19,18 @@
     <input type='submit' class="override-button-font center-block btn btn-warning" value='Skim Abstract'>
 </form>
 
-
-
-<!-- <div class="jumbotron"> -->
-<!-- <h1 class="display-4">Hello, world!</h1>
+<br>
+<div class="jumbotron">
+    <!-- <h1 class="display-4">Hello, world!</h1>
     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
     <hr class="my-4">
     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
     <p class="lead">
       <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </p> -->
-<!-- {% for result in results %}
+    {% for result in results %}
     <h4>{{result.label}} :</h4>
     <p>{{result.sentence}}</p>
     {%endfor%}
-</div> -->
+</div>
 {% endblock %}

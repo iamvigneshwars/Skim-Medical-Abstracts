@@ -15,22 +15,24 @@ def main_page():
     
     model = transformer()
     if request.method == 'POST':
-        abstract = request.form['abstract']
-        classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
-        data = create_data(abstract)
-        abs_pred_probs = model.predict(x = data)
-        abs_preds = tf.argmax(abs_pred_probs, axis=1)
-        abs_pred_classes = [classes[i] for i in abs_preds]
-        
         results = []
-        for i , line in enumerate(data[0]):
-            predicted = {
-                    'label':abs_pred_classes[i],
-                    'sentence':line
-                    }
+        if request.form['abstract']:
+            abstract = request.form['abstract']
+            classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
+            data = create_data(abstract)
+            abs_pred_probs = model.predict(x = data)
+            abs_preds = tf.argmax(abs_pred_probs, axis=1)
+            abs_pred_classes = [classes[i] for i in abs_preds]
+            
+            for i , line in enumerate(data[0]):
+                predicted = {
+                        'label':abs_pred_classes[i],
+                        'sentence':line
+                        }
 
-            results.append(predicted)
-        return render_template('main.html', results = results)
+                results.append(predicted)
+            return render_template('prediction_page.html', results = results)
+        return redirect('/')
     
     return render_template('main.html')
 
