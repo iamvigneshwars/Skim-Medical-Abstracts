@@ -1,12 +1,9 @@
 from flask import Flask, render_template, request, redirect
-from nltk import sent_tokenize
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from model import transformer
 import tensorflow as tf
-# from tensorflow.keras import layers
 from preprocess import create_data
-global model
 
 app = Flask(__name__)
 

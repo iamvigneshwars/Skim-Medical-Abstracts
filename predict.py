@@ -5,9 +5,8 @@ import tensorflow as tf
 from tensorflow.keras import layers
 from preprocess import create_data
 
-def classify(data):
+def classify(data, model):
     classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
-    model= transformer()
     data = create_data(data)
     abs_pred_probs = model.predict(x = data)
     abs_preds = tf.argmax(abs_pred_probs, axis=1)
@@ -23,3 +22,21 @@ def classify(data):
         results.append(predicted)
 
     return results
+
+if __name__ == "__main__":
+    model= transformer()
+    try:
+        cont = 'y'
+        while cont == 'y':
+            abstract = input("\nEnter the Abstract: \n\n")
+            result = classify(abstract, model)
+            
+            for r in result:
+                print(r['label'], " : ", r['sentence'], "\n")
+
+            cont = str(input("\nWant to skim another unstructured abstract? [y/n] : ").lower())
+
+    except:
+
+        print("Error !")
+
