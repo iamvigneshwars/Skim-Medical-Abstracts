@@ -6,11 +6,17 @@
 
 
 {% block body %} 
-<h1>Skim Unstructured RTC Medical Abstracts</h1>
+<!-- <h1>Skim Unstructured RTC Medical Abstracts</h1> -->
+<br>
 <form action ='/' method = 'POST'>
-    Paste Abstract: <input type ='text' name ='abstract' id='abstract'>
+    <!-- <label for ='text'>Enter Unstructured Abstract:</label> -->
+    <!-- <input class='form-control' type ='text' name ='text' id='text' placeholder="Enter Unstructured RTC medical abstract with more than three lines." aria-label='Enter Abstract' > -->
+    <textarea class="form-control" name = 'abstract' id="abstract" placeholder="Enter only unstructured RTC medical abstract with more than three lines." aria-label="Enter Abstract" rows="6"></textarea>
+    <!-- Paste Abstract: <input type ='text' name ='abstract' id='abstract'> -->
     <input type='submit' value='Skim'>
 </form>
+
+<br>
 
 {% for result in results %}
     <h4>{{result.label}} :</h4> 
