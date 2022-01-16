@@ -4,18 +4,19 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from model import transformer
 import tensorflow as tf
-from tensorflow.keras import layers
+# from tensorflow.keras import layers
 from preprocess import create_data
+global model
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
     
+    model = transformer()
     if request.method == 'POST':
         abstract = request.form['abstract']
         classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
-        model= transformer()
         data = create_data(abstract)
         abs_pred_probs = model.predict(x = data)
         abs_preds = tf.argmax(abs_pred_probs, axis=1)

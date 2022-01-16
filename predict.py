@@ -21,4 +21,5 @@ def classify(data):
                 }
 
         results.append(predicted)
+
     return results
