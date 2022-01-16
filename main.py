@@ -10,12 +10,12 @@ global model
 
 app = Flask(__name__)
 
+results = []
+model = transformer()
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
     
-    model = transformer()
     if request.method == 'POST':
-        results = []
         if request.form['abstract']:
             abstract = request.form['abstract']
             classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
@@ -31,10 +31,15 @@ def main_page():
                         }
 
                 results.append(predicted)
-            return render_template('prediction_page.html', results = results)
+            return redirect('/skim-abstracts')
         return redirect('/')
     
     return render_template('main.html')
+
+@app.route('/skim-abstracts', methods=['GET', 'POST'])
+def prediction_page():
+
+    return render_template('prediction_page.html',  results = results)
 
 if __name__ == "__main__":
     app.run(debug=True)
