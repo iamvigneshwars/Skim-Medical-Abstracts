@@ -8,15 +8,37 @@
 <br>
 <br>
 {% if results %}
-<a class="btn btn-success float-right" href='/'>New</a>
-<br>
+<!-- <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary">Left</button>
+  <button type="button" class="btn btn-secondary">Middle</button>
+  <button type="button" class="btn btn-secondary">Right</button>
+</div> -->
+
+<div class="dropdown">
+  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Target Section
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <!-- <a class="dropdown-item" href="/prediction_page/0">All</a> -->
+    <a class="dropdown-item" href="#">Objective</a>
+    <a class="dropdown-item" href="#">Background</a>
+    <a class="dropdown-item" href="#">Method</a>
+    <a class="dropdown-item" href="#">Result</a>
+    <a class="dropdown-item" href="#">Conclusion</a>
+  </div>
+<a style="display: inline"; class="btn btn-success float-right" href='/'>New Abstract</a>
+</div>
+
 <br>
 <div class="jumbotron">
     <!-- <a class="btn btn-success" href='/'>Edit</a> -->
-    {% for result in results %}
+    {% for result in results -%}
     <p><strong>{{result.label}} : </strong>{{result.sentence}}</p>
-    {%endfor%}
+    <!-- <p style="display: inline">{{result.sentence}}</p> -->
+    {%-endfor%}
 </div>
+
+<!-- <span style="background-color: #FFFF00">This text is highlighted in yellow.</span> -->
 
 {% else %}
 

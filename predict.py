@@ -23,20 +23,30 @@ def classify(data, model):
 
     return results
 
-if __name__ == "__main__":
-    model= transformer()
-    try:
-        cont = 'y'
-        while cont == 'y':
-            abstract = input("\nEnter the Abstract: \n\n")
-            result = classify(abstract, model)
+
+model = transformer()
+cont = 'y'
+while cont == 'y':
+    abstract = input("\nEnter the Abstract: \n\n")
+    result = classify(abstract, model)
+    
+    for r in result:
+        print(r['label'], " : ", r['sentence'], "\n")
+
+# if __name__ == "__main__":
+#     model= transformer()
+#     try:
+#         cont = 'y'
+#         while cont == 'y':
+#             abstract = input("\nEnter the Abstract: \n\n")
+#             result = classify(abstract, model)
             
-            for r in result:
-                print(r['label'], " : ", r['sentence'], "\n")
+#             for r in result:
+#                 print(r['label'], " : ", r['sentence'], "\n")
 
-            cont = str(input("\nWant to skim another unstructured abstract? [y/n] : ").lower())
+#             cont = str(input("\nWant to skim another unstructured abstract? [y/n] : ").lower())
 
-    except:
+#     except:
 
-        print("Error !")
+#         print("Error !")
 

@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, redirect
+from nltk import sent_tokenize
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from model import transformer
 import tensorflow as tf
 from preprocess import create_data
 
-app = Flask(__name__)
 
 model = transformer()
+app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
     
