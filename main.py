@@ -8,6 +8,7 @@ from preprocess import create_data
 
 
 model = transformer()
+classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
@@ -17,7 +18,6 @@ def main_page():
             abstract = request.form['abstract']
             global results
             results = []
-            classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
             data = create_data(abstract)
             abs_pred_probs = model.predict(x = data)
             abs_preds = tf.argmax(abs_pred_probs, axis=1)
@@ -30,15 +30,15 @@ def main_page():
                         }
 
                 results.append(predicted)
-            return redirect('/skim-abstracts')
+            return redirect('/skim-abstracts/5')
         return redirect('/')
     
     return render_template('main.html')
 
-@app.route('/skim-abstracts', methods=['GET', 'POST'])
-def prediction_page():
+@app.route('/skim-abstracts/<int:id>', methods=['GET', 'POST'])
+def prediction_page(id):
 
-    return render_template('prediction_page.html',  results = results)
+    return render_template('prediction_page.html',classes = classes,  results = results, id = id)
 
 if __name__ == "__main__":
     app.run(debug=True)

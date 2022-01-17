@@ -7,47 +7,39 @@
 {% block body %}
 <br>
 <br>
-{% if results %}
-<!-- <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary">Left</button>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
-</div> -->
 
 <div class="dropdown">
   <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Target Section
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <!-- <a class="dropdown-item" href="/prediction_page/0">All</a> -->
-    <a class="dropdown-item" href="#">Objective</a>
-    <a class="dropdown-item" href="#">Background</a>
-    <a class="dropdown-item" href="#">Method</a>
-    <a class="dropdown-item" href="#">Result</a>
-    <a class="dropdown-item" href="#">Conclusion</a>
+    <a class="dropdown-item" href="/skim-abstracts/5">All</a>
+    <a class="dropdown-item" href="/skim-abstracts/0">Background</a>
+    <a class="dropdown-item" href="/skim-abstracts/1">Conclusion</a>
+    <a class="dropdown-item" href="/skim-abstracts/2">Method</a>
+    <a class="dropdown-item" href="/skim-abstracts/3">Objective</a>
+    <a class="dropdown-item" href="/skim-abstracts/4">Result</a>
   </div>
 <a style="display: inline"; class="btn btn-success float-right" href='/'>New Abstract</a>
 </div>
 
 <br>
 <div class="jumbotron">
-    <!-- <a class="btn btn-success" href='/'>Edit</a> -->
-    {% for result in results -%}
-    <p><strong>{{result.label}} : </strong>{{result.sentence}}</p>
-    <!-- <p style="display: inline">{{result.sentence}}</p> -->
-    {%-endfor%}
+    {% if id == 5 %}
+      {% for result in results %}
+        <p><strong>{{result.label}} : </strong>{{result.sentence}}</p>
+        {%endfor%}
+    {% else %}
+      {% for result in results -%}
+        {% if classes[id] == result.label %}
+          <span style="background-color: #00ff15"><p style="display: inline">{{result.sentence}}</p></span>
+          {%else%}
+            <p style="display: inline">{{result.sentence}}</p>
+        {%endif%}
+      {%-endfor%}
+    {%endif%}
 </div>
 
 <!-- <span style="background-color: #FFFF00">This text is highlighted in yellow.</span> -->
 
-{% else %}
-
-  <div class="alert alert-danger alert-dismissible fade show">
-    <strong>Error!</strong> Abstract not found. Copy unstructured abstract with more than three sentences to classify.
-    <br>
-    <br>
-    <a class="btn btn-danger" href='/'>Back</a>
-    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
-</div>
-{%endif%}
 {% endblock %}
