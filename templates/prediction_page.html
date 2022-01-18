@@ -31,10 +31,12 @@
     Target Section
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item " href="/skim-abstracts=5" >All Sections</a>
-    <li><hr class="dropdown-divider"></li>
+    <a class="dropdown-item " href="/skim-abstracts=5">All Sections</a>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
     <a class="dropdown-item " href="/skim-abstracts=0">Background</a>
-    <a class="dropdown-item " href="/skim-abstracts=1" >Conclusion</a>
+    <a class="dropdown-item " href="/skim-abstracts=1">Conclusion</a>
     <a class="dropdown-item " href="/skim-abstracts=2">Method</a>
     <a class="dropdown-item " href="/skim-abstracts=3">Objective</a>
     <a class="dropdown-item " href="/skim-abstracts=4">Result</a>
@@ -45,7 +47,7 @@
 <br>
 
 
-<div class="jumbotron">
+<!-- <div class="jumbotron">
   {% if id == 5 %}
   {% for result in results %}
   <p><span class="badge badge-pill badge-info">{{result.label}}</span> {{result.sentence}}</p>
@@ -61,7 +63,31 @@
   {%endif%}
   {%-endfor%}
   {%endif%}
+</div> -->
+
+
+<div class="container-fluid py-5">
+  <div class="h-100 p-5 bg-light border rounded-3">
+    <div class="jumbotron">
+      {% if id == 5 %}
+      {% for result in results %}
+      <p><span class="badge badge-pill badge-info">{{result.label}}</span> {{result.sentence}}</p>
+      {%endfor%}
+      {% else %}
+      {% for result in results -%}
+      {% if classes[id] == result.label %}
+      <span style="background-color: #00ff15">
+        <p style="display: inline">{{result.sentence}}</p>
+      </span>
+      {%else%}
+      <p style="display: inline">{{result.sentence}}</p>
+      {%endif%}
+      {%-endfor%}
+      {%endif%}
+    </div>
+  </div>
 </div>
+
 
 <!-- <span style="background-color: #FFFF00">This text is highlighted in yellow.</span> -->
 
