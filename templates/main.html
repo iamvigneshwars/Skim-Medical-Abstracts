@@ -3,35 +3,39 @@
 {% block head %}
 <title>Skim Unstructured Medical Abstracts</title>
 {% endblock %}
-<style>
-    input {
-        text-align: center;
-    }
-
-    ::-webkit-input-placeholder {
-        text-align: center;
-    }
-
-    :-moz-placeholder {
-        text-align: center;
-    }
-</style>
-
 {% block body %}
 <br>
 <br>
 <br>
 <br>
 
+{% if error %}
+<div class="alert alert-danger" role="alert">
+   Oops! Enter only unstructured medical abstract with more than three lines!
+  </div>
 <div class="form-floating">
     <form action='/' method='POST'>
         <textarea class="form-control" name='abstract' id="abstract"
-            placeholder="Enter only unstructured RTC medical abstract with more than three lines."
+            placeholder="Enter Abstract."
             aria-label="Enter Abstract" rows="8"></textarea>
         <br>
         <input type='submit' class="override-button-font center-block btn btn-warning" value='Skim Abstract'>
     </form>
 </div>
+
+{% else %}
+
+<div class="form-floating">
+    <form action='/' method='POST'>
+        <textarea class="form-control align-middle" name='abstract' id="abstract"
+            placeholder="Enter Abstract"
+            aria-label="Enter Abstract" rows="8"></textarea>
+        <br>
+        <input type='submit' class="override-button-font center-block btn btn-warning" value='Skim Abstract'>
+    </form>
+</div>
+
+{% endif %}
 
 <!-- <form class="was-validated">
     <div class="mb-3">

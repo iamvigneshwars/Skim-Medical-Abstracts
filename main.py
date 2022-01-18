@@ -13,27 +13,32 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
     
-    if request.method == 'POST':
-        if request.form['abstract']:
-            abstract = request.form['abstract']
-            global results
-            results = []
-            data = create_data(abstract)
-            abs_pred_probs = model.predict(x = data)
-            abs_preds = tf.argmax(abs_pred_probs, axis=1)
-            abs_pred_classes = [classes[i] for i in abs_preds]
-            
-            for i , line in enumerate(data[0]):
-                predicted = {
-                        'label':abs_pred_classes[i],
-                        'sentence':line
-                        }
+    try:
 
-                results.append(predicted)
-            return redirect('/skim-abstracts=5')
-        return redirect('/')
-    
-    return render_template('main.html')
+        if request.method == 'POST':
+            if request.form['abstract']:
+                abstract = request.form['abstract']
+                global results
+                results = []
+                data = create_data(abstract)
+                abs_pred_probs = model.predict(x = data)
+                abs_preds = tf.argmax(abs_pred_probs, axis=1)
+                abs_pred_classes = [classes[i] for i in abs_preds]
+                
+                for i , line in enumerate(data[0]):
+                    predicted = {
+                            'label':abs_pred_classes[i],
+                            'sentence':line
+                            }
+
+                    results.append(predicted)
+                return redirect('/skim-abstracts=5')
+            return redirect('/')
+        
+        return render_template('main.html')
+
+    except:
+        return render_template('main.html', error = True)
 
 @app.route('/skim-abstracts=<int:id>', methods=['GET', 'POST'])
 def prediction_page(id):
