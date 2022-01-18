@@ -7,8 +7,17 @@
 {% block body %}
 <br>
 <br>
-
-<div class="dropdown">
+<div class="btn-group" role="group" aria-label="Basic example">
+  <a class="btn btn-dark" href="/skim-abstracts=5">All</a>
+  <a class="btn btn-dark" href="/skim-abstracts=0">Background</a>
+  <a class="btn btn-dark" href="/skim-abstracts=1">Conclusion</a>
+  <a class="btn btn-dark" href="/skim-abstracts=2">Method</a>
+  <a class="btn btn-dark" href="/skim-abstracts=3">Objective</a>
+  <a class="btn btn-dark" href="/skim-abstracts=4">Result</a>
+ 
+</div>                                           
+   <a style="display: inline"; class="btn btn-success float-right" href='/'>New Abstract</a>                                               
+<!-- <div class="dropdown">                           
   <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Target Section
   </button>
@@ -21,13 +30,13 @@
     <a class="dropdown-item" href="/skim-abstracts/4">Result</a>
   </div>
 <a style="display: inline"; class="btn btn-success float-right" href='/'>New Abstract</a>
-</div>
-
+</div> -->
+<br>
 <br>
 <div class="jumbotron">
     {% if id == 5 %}
       {% for result in results %}
-        <p><strong>{{result.label}} : </strong>{{result.sentence}}</p>
+        <p><span class="badge badge-pill badge-info">{{result.label}}</span> {{result.sentence}}</p>
         {%endfor%}
     {% else %}
       {% for result in results -%}

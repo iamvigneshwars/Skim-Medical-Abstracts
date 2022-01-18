@@ -30,12 +30,12 @@ def main_page():
                         }
 
                 results.append(predicted)
-            return redirect('/skim-abstracts/5')
+            return redirect('/skim-abstracts=5')
         return redirect('/')
     
     return render_template('main.html')
 
-@app.route('/skim-abstracts/<int:id>', methods=['GET', 'POST'])
+@app.route('/skim-abstracts=<int:id>', methods=['GET', 'POST'])
 def prediction_page(id):
 
     return render_template('prediction_page.html',classes = classes,  results = results, id = id)
