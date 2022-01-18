@@ -7,46 +7,60 @@
 {% block body %}
 <br>
 <br>
-<div class="btn-group" role="group" aria-label="Basic example">
-  <a class="btn btn-dark" href="/skim-abstracts=5">All</a>
-  <a class="btn btn-dark" href="/skim-abstracts=0">Background</a>
-  <a class="btn btn-dark" href="/skim-abstracts=1">Conclusion</a>
-  <a class="btn btn-dark" href="/skim-abstracts=2">Method</a>
-  <a class="btn btn-dark" href="/skim-abstracts=3">Objective</a>
-  <a class="btn btn-dark" href="/skim-abstracts=4">Result</a>
- 
-</div>                                           
-   <a style="display: inline"; class="btn btn-success float-right" href='/'>New Abstract</a>                                               
-<!-- <div class="dropdown">                           
-  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<br>
+
+<!-- <div class="dropdown">
+  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
     Target Section
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="/skim-abstracts/5">All</a>
-    <a class="dropdown-item" href="/skim-abstracts/0">Background</a>
-    <a class="dropdown-item" href="/skim-abstracts/1">Conclusion</a>
-    <a class="dropdown-item" href="/skim-abstracts/2">Method</a>
-    <a class="dropdown-item" href="/skim-abstracts/3">Objective</a>
-    <a class="dropdown-item" href="/skim-abstracts/4">Result</a>
+    <a class="dropdown-item active" href="/skim-abstracts=5" aria-current="true">All</a>
+    <a class="dropdown-item active" href="/skim-abstracts=0" aria-current="true">Background</a>
+    <a class="dropdown-item active" href="/skim-abstracts=1" aria-current="true">Conclusion</a>
+    <a class="dropdown-item active" href="/skim-abstracts=2" aria-current="true">Method</a>
+    <a class="dropdown-item active" href="/skim-abstracts=3" aria-current="true">Objective</a>
+    <a class="dropdown-item active" href="/skim-abstracts=4" aria-current="true">Result</a>
   </div>
-<a style="display: inline"; class="btn btn-success float-right" href='/'>New Abstract</a>
+  <a style="display: inline" ; class="btn btn-success float-right" href='/'>New Abstract</a>
 </div> -->
+
+<div class="dropdown">
+  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    Target Section
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item " href="/skim-abstracts=5" >All Sections</a>
+    <li><hr class="dropdown-divider"></li>
+    <a class="dropdown-item " href="/skim-abstracts=0">Background</a>
+    <a class="dropdown-item " href="/skim-abstracts=1" >Conclusion</a>
+    <a class="dropdown-item " href="/skim-abstracts=2">Method</a>
+    <a class="dropdown-item " href="/skim-abstracts=3">Objective</a>
+    <a class="dropdown-item " href="/skim-abstracts=4">Result</a>
+  </div>
+  <a style="display: inline" ; class="btn btn-success float-right" href='/'>New Abstract</a>
+</div>
+
 <br>
-<br>
+
+
 <div class="jumbotron">
-    {% if id == 5 %}
-      {% for result in results %}
-        <p><span class="badge badge-pill badge-info">{{result.label}}</span> {{result.sentence}}</p>
-        {%endfor%}
-    {% else %}
-      {% for result in results -%}
-        {% if classes[id] == result.label %}
-          <span style="background-color: #00ff15"><p style="display: inline">{{result.sentence}}</p></span>
-          {%else%}
-            <p style="display: inline">{{result.sentence}}</p>
-        {%endif%}
-      {%-endfor%}
-    {%endif%}
+  {% if id == 5 %}
+  {% for result in results %}
+  <p><span class="badge badge-pill badge-info">{{result.label}}</span> {{result.sentence}}</p>
+  {%endfor%}
+  {% else %}
+  {% for result in results -%}
+  {% if classes[id] == result.label %}
+  <span style="background-color: #00ff15">
+    <p style="display: inline">{{result.sentence}}</p>
+  </span>
+  {%else%}
+  <p style="display: inline">{{result.sentence}}</p>
+  {%endif%}
+  {%-endfor%}
+  {%endif%}
 </div>
 
 <!-- <span style="background-color: #FFFF00">This text is highlighted in yellow.</span> -->
