@@ -3,6 +3,7 @@ from nltk import sent_tokenize
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from model import transformer
+import numpy as np
 import tensorflow as tf
 from preprocess import create_data
 
@@ -22,13 +23,15 @@ def main_page():
                 results = []
                 data = create_data(abstract)
                 abs_pred_probs = model.predict(x = data)
-                abs_preds = tf.argmax(abs_pred_probs, axis=1)
+                pred_prob = np.max(abs_pred_probs, axis = 1)
+                abs_preds = tf.argmax(abs_pred_probs, axis=1).numpy()
                 abs_pred_classes = [classes[i] for i in abs_preds]
                 
                 for i , line in enumerate(data[0]):
                     predicted = {
                             'label':abs_pred_classes[i],
-                            'sentence':line
+                            'sentence':line,
+                            'prob':round(pred_prob[i] * 100, 2) 
                             }
 
                     results.append(predicted)
