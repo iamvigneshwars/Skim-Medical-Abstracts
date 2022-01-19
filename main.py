@@ -9,7 +9,7 @@ from preprocess import create_data
 
 
 model = transformer()
-classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
+classes = ["BACKGROUND", "CONCLUSION", "METHOD", "OBJECTIVE", "RESULT"]
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
