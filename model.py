@@ -51,6 +51,7 @@ def transformer():
     word_model = tf.keras.Model(inputs=sent_inputs,
                                 outputs=attention_layer)
 
+    # gna remove character embeddings model
     # Character Embeddings Model
     char_inputs = layers.Input(shape=[], dtype=tf.string)
     char_vectorizer = vectorizer_char(char_inputs)
