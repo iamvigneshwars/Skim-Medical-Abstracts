@@ -4,7 +4,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from model import transformer
 import numpy as np
 import tensorflow as tf
-from preprocess import create_data
+from preprocess import createData
 
 
 model = transformer()
@@ -20,7 +20,7 @@ def main_page():
                 abstract = request.form['abstract']
                 global results
                 results = []
-                data = create_data(abstract)
+                data = createData(abstract)
                 abs_pred_probs = model.predict(x = data)
                 pred_prob = np.max(abs_pred_probs, axis = 1)
                 abs_preds = tf.argmax(abs_pred_probs, axis=1).numpy()
