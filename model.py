@@ -42,41 +42,33 @@ def transformer():
 
 
     # THE MODEL:
+
     # Word Embeddings Model
     sent_inputs = layers.Input(shape=[], dtype=tf.string)
     sent_vec = vectorizer(sent_inputs)
     word_embeddings = embedding_layer(sent_vec)
-    word_layer_2= layers.Bidirectional(layers.LSTM(128, return_sequences = True))(word_embeddings)
-    attention_layer=attention()(word_layer_2)
+    attention_layer=attention()(word_embeddings)
+    word_layer_2= layers.Bidirectional(layers.LSTM(128, return_sequences = True))(attention_layer)
+    word_layer_3= layers.Bidirectional(layers.LSTM(128, return_sequences = False))(word_layer_2)
     word_model = tf.keras.Model(inputs=sent_inputs,
-                                outputs=attention_layer)
+                                outputs=word_layer_3)
 
-    # gna remove character embeddings model
-    # Character Embeddings Model
-    char_inputs = layers.Input(shape=[], dtype=tf.string)
-    char_vectorizer = vectorizer_char(char_inputs)
-    char_embeddings = char_layer(char_vectorizer)
-    char_layer_1= layers.Bidirectional(layers.LSTM(128, return_sequences=True))(char_embeddings) 
-    char_model = tf.keras.Model(inputs=char_inputs,
-                              outputs=char_layer_1)
 
     # Position model
-    position_inputs = layers.Input(shape=(460,), dtype = tf.int64)
-    pos_dense = layers.Dense(64, activation = 'relu')(position_inputs)
-    pos_model = tf.keras.Model(position_inputs, pos_dense)
+    position_inputs = layers.Input(shape=(5,))
+    pos_model = tf.keras.Model(position_inputs,
+                               position_inputs)
 
-    word_char_layer = layers.Concatenate(axis =1)([attention_layer,
-                                            char_layer_1])
 
-    word_char_lstm = layers.Bidirectional(layers.LSTM(128))(word_char_layer)
-    word_char_dropout = layers.Dropout(0.5)(word_char_lstm)
 
-    hybrid_layer = layers.Concatenate(name="word_char_pos")([word_char_dropout,
+    concat_layer = layers.Concatenate(name="word_char_pos")([word_model.output,
                                                             pos_model.output])
 
-    output = layers.Dense(5, activation = 'softmax')(hybrid_layer)
+
+    concat_dense = layers.Dense(128, activation='relu')(concat_layer)
+
+    output = layers.Dense(5, activation = 'softmax')(concat_dense)
     model = tf.keras.Model(inputs = [word_model.input,
-                                     char_model.input,
                                      pos_model.input],
                            outputs =  output)
 
@@ -84,7 +76,50 @@ def transformer():
                     optimizer = tf.keras.optimizers.Adam(learning_rate = 0.001),
                     metrics = ['accuracy'])
 
-    model.load_weights("Model/Model").expect_partial()
+    # # THE MODEL:
+    # # Word Embeddings Model
+    # sent_inputs = layers.Input(shape=[], dtype=tf.string)
+    # sent_vec = vectorizer(sent_inputs)
+    # word_embeddings = embedding_layer(sent_vec)
+    # word_layer_2= layers.Bidirectional(layers.LSTM(128, return_sequences = True))(word_embeddings)
+    # attention_layer=attention()(word_layer_2)
+    # word_model = tf.keras.Model(inputs=sent_inputs,
+    #                             outputs=attention_layer)
+
+    # # gna remove character embeddings model
+    # # Character Embeddings Model
+    # char_inputs = layers.Input(shape=[], dtype=tf.string)
+    # char_vectorizer = vectorizer_char(char_inputs)
+    # char_embeddings = char_layer(char_vectorizer)
+    # char_layer_1= layers.Bidirectional(layers.LSTM(128, return_sequences=True))(char_embeddings) 
+    # char_model = tf.keras.Model(inputs=char_inputs,
+    #                           outputs=char_layer_1)
+
+    # # Position model
+    # position_inputs = layers.Input(shape=(460,), dtype = tf.int64)
+    # pos_dense = layers.Dense(64, activation = 'relu')(position_inputs)
+    # pos_model = tf.keras.Model(position_inputs, pos_dense)
+
+    # word_char_layer = layers.Concatenate(axis =1)([attention_layer,
+    #                                         char_layer_1])
+
+    # word_char_lstm = layers.Bidirectional(layers.LSTM(128))(word_char_layer)
+    # word_char_dropout = layers.Dropout(0.5)(word_char_lstm)
+
+    # hybrid_layer = layers.Concatenate(name="word_char_pos")([word_char_dropout,
+    #                                                         pos_model.output])
+
+    # output = layers.Dense(5, activation = 'softmax')(hybrid_layer)
+    # model = tf.keras.Model(inputs = [word_model.input,
+    #                                  char_model.input,
+    #                                  pos_model.input],
+    #                        outputs =  output)
+
+    # model.compile(loss = tf.keras.losses.CategoricalCrossentropy(label_smoothing= 0.3),
+    #                 optimizer = tf.keras.optimizers.Adam(learning_rate = 0.001),
+    #                 metrics = ['accuracy'])
+
+    model.load_weights("Model/model").expect_partial()
 
     return model
 
