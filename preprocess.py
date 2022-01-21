@@ -8,12 +8,16 @@ def create_data(abstract):
     data = sent_tokenize(abstract)
     abstracts = []
 
+    def convert(num, maximum):
+        new_value = ( (num - 1) / (maximum - 1) ) * (5 - 1) + 1
+        return round(new_value)
+
     position = ['#', 'FIRST', 'SECOND', 'THIRD', 'FOURTH', 'FIFTH']
     for line_no, abst_lines in enumerate(data):
         each_line = {}
         # each_line['position'] = str(line_no+1) +"_of_"+ str(len(data))
         each_line["text"] = abst_lines 
-        each_line['position'] = position[convert(line_no+1, len(abstract_lines))]
+        each_line['position'] = position[convert(line_no+1, len(data))]
         abstracts.append(each_line)
 
     abstract = pd.DataFrame(abstracts)
