@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request, redirect
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-from model import transformer
+from model import hybridModel
 import numpy as np
 import tensorflow as tf
 from preprocess import createData
 
 
-model = transformer()
+model = hybridModel()
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])

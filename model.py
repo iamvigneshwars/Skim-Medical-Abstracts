@@ -21,7 +21,8 @@ class attention(layers.Layer):
         at=tf.keras.backend.expand_dims(at,axis=-1)
         return intput_emb*at
 
-def transformer():
+def hybridModel():
+
     vectorizer = layers.experimental.preprocessing.TextVectorization(max_tokens=68000,
                                                                      output_sequence_length=55)
 
