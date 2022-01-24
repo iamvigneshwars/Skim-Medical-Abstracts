@@ -12,6 +12,13 @@ randomized controlled trials medical abstracts into their appropriate
 sections thereby helping the researchers to collect the required
 information expeditiously. 
 
+
+## Model Architecture
+<p float="left">
+  <img src="static/model.png" width="400" />
+</p>
+
+
 ## Installing as a package
 
 You can install the package using PIP, which will help you use the `discourse` classes inside a module
