@@ -1,6 +1,6 @@
 # Annotate Sections in Unstructured Medical Abstracts
 
-# Introduction
+## Introduction
 
 Close to two million works of medicals literatures are published each year.
 Due to the increasing number of publications, the researchers need special
