@@ -1,9 +1,16 @@
-# Skim-Medical-Abstracts
+# Annotate Sections in Unstructured Medical Abstracts
 
-# Claim Extraction for Scientific Publications
+# Introduction
 
-Detecting claim from scientific publication using [discourse model](https://github.com/Franck-Dernoncourt/pubmed-rct) and transfer learning. 
-Models are trained using [AllenNLP](https://github.com/allenai/allennlp) library.
+Close to two million works of medicals literatures are published each year.
+Due to the increasing number of publications, the researchers need special
+tools to skim through the literature. It is difficult to extract relevant
+information quickly from an unstructured abstract. Accessing information
+from the literature will be easier if the abstract of the literature is
+structured. This project aims to annotate each sentence in
+randomized controlled trials medical abstracts into their appropriate
+sections thereby helping the researchers to collect the required
+information expeditiously. 
 
 ## Installing as a package
 
