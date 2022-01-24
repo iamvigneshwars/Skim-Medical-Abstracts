@@ -8,6 +8,8 @@ from preprocess import createData
 
 
 model = hybridModel()
+classes = ["BACKGROUND", "CONCLUSION", "METHOD", "OBJECTIVE", "RESULT"]
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -24,7 +26,6 @@ def main_page():
                 abs_pred_probs = model.predict(x = data)
                 pred_prob = np.max(abs_pred_probs, axis = 1)
                 abs_preds = tf.argmax(abs_pred_probs, axis=1).numpy()
-                classes = ["BACKGROUND", "CONCLUSION", "METHOD", "OBJECTIVE", "RESULT"]
                 abs_pred_classes = [classes[i] for i in abs_preds]
                 
                 for i , line in enumerate(data[0]):
@@ -46,7 +47,7 @@ def main_page():
 @app.route('/skim-abstracts=<int:id>', methods=['GET', 'POST'])
 def prediction_page(id):
 
-    return render_template('prediction_page.html',classes =["BACKGROUND", "CONCLUSION", "METHOD", "OBJECTIVE", "RESULT"],  results = results, id = id)
+    return render_template('prediction_page.html',classes = classes,  results = results, id = id)
 
 if __name__ == "__main__":
     app.run(debug=True)
