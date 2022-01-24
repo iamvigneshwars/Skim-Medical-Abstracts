@@ -7,8 +7,9 @@ import tensorflow as tf
 from preprocess import createData
 
 
-model = hybridModel()
-classes = ["BACKGROUND", "CONCLUSION", "METHOD", "OBJECTIVE", "RESULT"]
+# Inialize the model 
+MODEL = hybridModel()
+CLASSES = ["BACKGROUND", "CONCLUSION", "METHOD", "OBJECTIVE", "RESULT"]
 
 app = Flask(__name__)
 
@@ -17,16 +18,20 @@ def main_page():
     
     try:
 
+        # If the user enters the abstracts then the model makes
+        # predictions and the prediction page will be rendered.
         if request.method == 'POST':
             if request.form['abstract']:
                 abstract = request.form['abstract']
-                global results
-                results = []
+                # Store the predicted labels
+                global RESULTS
+                RESULTS = []
+                # Preprocess the data
                 data = createData(abstract)
-                abs_pred_probs = model.predict(x = data)
+                abs_pred_probs = MODEL.predict(x = data)
                 pred_prob = np.max(abs_pred_probs, axis = 1)
                 abs_preds = tf.argmax(abs_pred_probs, axis=1).numpy()
-                abs_pred_classes = [classes[i] for i in abs_preds]
+                abs_pred_classes = [CLASSES[i] for i in abs_preds]
                 
                 for i , line in enumerate(data[0]):
                     predicted = {
@@ -35,19 +40,28 @@ def main_page():
                             'prob':round(pred_prob[i] * 100, 2) 
                             }
 
-                    results.append(predicted)
+                    RESULTS.append(predicted)
+                
+                # Redirects to the prediction page
                 return redirect('/skim-abstracts=5')
+
+            # Blank submit
             return redirect('/')
         
+        # Initial page. 
         return render_template('main.html')
 
     except:
+        # If the input is less than three lines, or if the prediction pages breaks for some
+        # reason, renders the initial page. If you want to add to this code or debug this code, it is better not to 
+        # use try except block.
         return render_template('main.html', error = True)
 
 @app.route('/skim-abstracts=<int:id>', methods=['GET', 'POST'])
 def prediction_page(id):
 
-    return render_template('prediction_page.html',classes = classes,  results = results, id = id)
+    # Renders the prediction page with predicted labels.
+    return render_template('prediction_page.html',classes = CLASSES,  results = RESULTS, id = id)
 
 if __name__ == "__main__":
     app.run(debug=True)

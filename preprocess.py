@@ -5,18 +5,45 @@ import joblib
 
 def createData(abstract):
 
-    data = sent_tokenize(abstract)
+    """
+    This function extracts the text from all the sentences and
+    extracts the positional information of the sentences in an unstructract.
+
+    Args:
+
+        abstract - raw text of unstructured abstract.
+
+    Returns: 
+
+        A tuple containing list of sentences from the abstract and,
+        a list of one hot encoded positional vector for all sentences. 
+
+        Example :
+
+        (
+        ["Although immune-mediated ther..... promising treatment options.",
+         "In renal cell carcino.....  with metastatic disease",
+         "In urothelial carcinoma, cp..... for other indications.], 
+          
+        [[0, 1, 0, 0, 0],
+         [0, 0, 1, 0, 0],
+         [1, 0, 0, 0, 0]]]
+        )
+
+    """
+
+
+    data = sent_tokenize(abstract) # Tokenize each sentences
     abstracts = []
-
-    def scaleNumberOfLines(num, maximum):
-        new_value = ( (num - 1) / (maximum - 1) ) * (5 - 1) + 1
-        return round(new_value)
-
+    
+    # Divide abstract into rough sections. 
     position = ['#', 'FIRST', 'SECOND', 'THIRD', 'FOURTH', 'FIFTH']
     for line_no, abst_lines in enumerate(data):
         each_line = {}
         each_line["text"] = abst_lines 
-        each_line['position'] = position[scaleNumberOfLines(line_no+1, len(data))]
+        # Categorizes the position of sentence equally (1 to 5)
+        scale_line = round(( (line_no + 1 - 1) / (len(data) - 1) ) * (5 - 1) + 1) 
+        each_line['position'] = position[scale_line]
         abstracts.append(each_line)
 
     abstract = pd.DataFrame(abstracts)

@@ -6,6 +6,37 @@ from tensorflow.keras import layers
 from preprocess import createData
 
 def classify(data, model):
+
+    """
+    This function makes predictions for each sentences in the input text with its'
+    appropriate headings or sections. 
+
+    Args : 
+    
+            data  - Unstructured medical abstracts.
+            model - Model that trained to classify abstract sentences.
+
+    Returns:
+
+            A list of dictionary that contains the sentence and label of
+            the sentence. 
+
+            Example : 
+
+                results = [
+                    {
+                        label : BACKGROUND, 
+                        sentence : Most cancer patients are treated with some combination of surgery, radiation, and chemotherapy. 
+                    }.
+                    {
+                        label : METHODS,
+                        sentence : We retrospectively analyzed the data of 867 COVID-19 cases. 
+                    }
+                ]
+
+    """
+
+
     classes = ["BACKGROUND", "CONCLUSIONS", "METHODS", "OBJECTIVE", "RESULTS"]
     data = createData(data)
     abs_pred_probs = model.predict(x = data)
@@ -23,8 +54,13 @@ def classify(data, model):
 
     return results
 
+
+
+#Only runs when this file is executed directly. 
 if __name__ == "__main__":
+
     model= hybridModel()
+
     try:
         cont = 'y'
         while cont == 'y' or cont =='':
