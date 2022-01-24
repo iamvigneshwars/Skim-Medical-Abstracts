@@ -14,7 +14,10 @@ information expeditiously.
 
 
 ## Model Architecture
-<p float="left">
+
+The model Contains an attention layer, followed by two Bi-directional LSTM layers. The output for Bi-LSTM layer is concatinated with sentence position feature (one hot vector). The output of concatinated layers if fed into a fully connected layer with 128 neurons followed by an output layer that contains 5 neurons (5 output classes).
+
+<p float="center">
   <img src="static/model.png" width="400" />
 </p>
 
