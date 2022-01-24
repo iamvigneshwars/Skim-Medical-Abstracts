@@ -36,6 +36,8 @@ export FLASK_APP=main.py
 flask run --host=0.0.0.0 # this will serve at port 5000 (default)
 ```
 
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
 or to make predictions on CLI, run the predict.py as follows
 
 
