@@ -35,23 +35,30 @@ You can make predictions on CLI or using an web interface. To use the flask web 
 export FLASK_APP=main.py
 flask run --host=0.0.0.0 # this will serve at port 5000 (default)
 ```
+the flask web interface will look as follows, 
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/iamvigneshwars/annotate-unstructured-medical-abstracts/blob/main/static/web_interface_demo.gif)
 
-or to make predictions on CLI, run the predict.py as follows
+or to make predictions on CLI, run the predict.py as follows,
 
 
 ```bash
 python predict.py
 ```
+Prediction in CLI looks as follows,
 
+![alt text](https://github.com/iamvigneshwars/annotate-unstructured-medical-abstracts/blob/main/static/cli_demo.gif)
 
 ## Requirements
 
-- [Python 3.6](https://www.python.org/downloads/release/python-360/)
-- [AllenNLP](https://github.com/allenai/allennlp) >= 0.6.1
-- [spacy](https://github.com/explosion/spaCy)
-- [fastText](https://github.com/facebookresearch/fastText)
-- [Pubmed RCT](https://github.com/Franck-Dernoncourt/pubmed-rct) - dataset
+- [Python](https://www.python.org/downloads/) >= 3.7
+- [Tensorflow](https://www.tensorflow.org/install) >= 2.4
+- [nltk](https://numpy.org/install/) >= 3.6
+- [Numpy](https://github.com/facebookresearch/fastText) = 1.19 (numpy > 1.19 gives some index error with tensorflow v2)
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/) >= 2.0
 
 
+## Bugs and Future Improvements
+
+- The sentence position feature has high influence on model predictions.  
+- A more sophisticated model like Transformers, or BERT models can be used to make predictions without relying on sentence position feature.  
