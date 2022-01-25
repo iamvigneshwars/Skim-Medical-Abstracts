@@ -235,6 +235,8 @@ def create_dataset(data):
             abstract_lines = []
     return abstracts 
 
+# Data: https://github.com/Franck-Dernoncourt/pubmed-rct.git
+
 dataset_dir_20k = "pubmed-rct/PubMed_20k_RCT_numbers_replaced_with_at_sign/"
 
 # Load PubMed_20k_RCT_numbers_replaced_with_at_sign dataset
@@ -289,6 +291,7 @@ physical_devices = tf.config.list_physical_devices('GPU')
 for device in physical_devices:
     tf.config.experimental.set_memory_growth(device, True)
 
+# Initializing vectorizer layers.
 vectorizer = layers.experimental.preprocessing.TextVectorization(max_tokens=68000,
                                                                  output_sequence_length=55) # 95% sentences contain 55 words as seen in data analysis.
 
@@ -298,6 +301,9 @@ vectorizer_char = layers.experimental.preprocessing.TextVectorization(max_tokens
                                     name = 'Character_vectorizer')
 
 vectorizer_char.adapt(train_chars.to_list())
+
+
+# Pretrained Embeddings:  http://nlp.stanford.edu/data/glove.6B.zip
 
 path_to_glove_file = "glove.6B/glove.6B.300d.txt"
 voc = vectorizer.get_vocabulary()
