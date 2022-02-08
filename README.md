@@ -22,7 +22,7 @@ The proprocessed data consists of text, target and position of the sentences in 
 
 The model Contains an attention layer, followed by two Bi-directional LSTM layers. The output for Bi-LSTM layer is concatinated with sentence position feature (one hot vector). The output of concatinated layers if fed into a fully connected layer with 128 neurons followed by an output layer that contains 5 neurons (5 output classes).
 
-<p float="middle">
+<p align="center">
   <img src="static/model.png" width="450" />
 </p>
 
@@ -37,7 +37,11 @@ flask run --host=0.0.0.0 # this will serve at port 5000 (default)
 ```
 the flask web interface will look as follows, 
 
-![alt text](https://github.com/iamvigneshwars/annotate-unstructured-medical-abstracts/blob/main/static/web_interface_demo.gif)
+
+<p align="center">
+  <img src="/static/web_interface_demo.gif" alt="animated" />
+</p>
+
 
 or to make predictions on CLI, run the predict.py as follows,
 
@@ -47,7 +51,9 @@ python predict.py
 ```
 Prediction in CLI looks as follows,
 
-![alt text](https://github.com/iamvigneshwars/annotate-unstructured-medical-abstracts/blob/main/static/cli_demo.gif)
+<p align="center">
+  <img src="/static/cli_demo.gif" alt="animated" />
+</p>
 
 ## Requirements
 
