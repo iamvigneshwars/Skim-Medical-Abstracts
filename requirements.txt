@@ -1,4 +1,5 @@
 gunicorn
+pytest
 Flask==2.0
 tensorflow-cpu
 numpy==1.19
