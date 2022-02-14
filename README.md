@@ -32,7 +32,7 @@ The model Contains an attention layer, followed by two Bi-directional LSTM layer
 You can make predictions on CLI or using an web interface. To use the flask web interface run program as follows
 
 ```bash
-export FLASK_APP=main.py
+export FLASK_APP=app.py
 flask run --host=0.0.0.0 # this will serve at port 5000 (default)
 ```
 the flask web interface will look as follows, 
