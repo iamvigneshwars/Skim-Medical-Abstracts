@@ -49,13 +49,13 @@ def main_page():
             return redirect('/')
         
         # Initial page. 
-        return render_template('main.html')
+        return render_template('index.html')
 
     except:
         # If the input is less than three lines, or if the prediction pages breaks for some
         # reason, renders the initial page. If you want to add to this code or debug this code, it is better not to 
         # use try except block.
-        return render_template('main.html', error = True)
+        return render_template('index.html', error = True)
 
 @app.route('/skim-abstracts=<int:id>', methods=['GET', 'POST'])
 def prediction_page(id):
