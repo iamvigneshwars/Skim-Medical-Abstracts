@@ -7,9 +7,9 @@ import pandas as pd
 import joblib
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
-from termcolor import colored
-import matplotlib.pyplot as plt
-import itertools
+# from termcolor import colored
+# import matplotlib.pyplot as plt
+# import itertools
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, classification_report, confusion_matrix
 
 # Useful Custom Functions that will be useful on ipython notebook 
