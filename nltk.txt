@@ -1,3 +1,5 @@
-corpus
+wordnet
+porter_test
+reuters
+punkt
 stopwords
-punkt 
