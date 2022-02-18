@@ -18,8 +18,8 @@ def main_page():
     
     # try:
 
-    # If the user enters the abstracts then the model makes
-    # predictions and the prediction page will be rendered.
+        # If the user enters the abstracts then the model makes
+        # predictions and the prediction page will be rendered.
     if request.method == 'POST':
         if request.form['abstract']:
             abstract = request.form['abstract']
