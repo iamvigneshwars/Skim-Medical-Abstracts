@@ -12,6 +12,8 @@ MODEL = hybridModel()
 CLASSES = ["BACKGROUND", "CONCLUSION", "METHOD", "OBJECTIVE", "RESULT"]
 
 app = Flask(__name__)
+global RESULTS
+RESULTS = []
 
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
@@ -24,8 +26,6 @@ def main_page():
         if request.form['abstract']:
             abstract = request.form['abstract']
             # Store the predicted labels
-            global RESULTS
-            RESULTS = []
             # Preprocess the data
             data = createData(abstract)
             abs_pred_probs = MODEL.predict(x = data)
